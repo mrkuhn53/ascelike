@@ -1,0 +1,662 @@
+%
+%\documentclass[Journal]{ascelike}
+ \documentclass[Proceedings]{ascelike}
+%\documentclass[Preprint,10pt]{ascelike}
+%
+% Jan. 30, 2025
+%
+% include this line for producing ASCE-sytle citations and bibliography
+\usepackage{biblatex}
+% !!! Note that you should use "biber", not "bibtex", to process the citations.
+%
+% state your bibliographic ".bib" databases here.  Include the suffix ".bib".
+\addbibresource{ascexmpl.bib}
+%
+% the following are some useful packages, but it's your choice
+%
+% handling graphics in figures
+\usepackage{graphicx}
+%
+% AMS macros and fonts
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsbsy}
+%
+% the booktabs package, for nicer tables
+\usepackage{booktabs}
+  \setlength\heavyrulewidth{1.5pt}
+  \setlength\lightrulewidth{1.0pt}
+  \setlength\abovetopsep{0pt}
+  \setlength\belowrulesep{0pt}
+%
+% to use hyperlinks within pdf document (with pdflatex, not latex):
+%\usepackage[colorlinks=true,citecolor=red,linkcolor=black]{hyperref}
+%
+% NOTE: Don't include the \NameTag{<your name>} if you have selected
+%       the NoPageNumbers option: this leads to an inconsistency and
+%       a warning, and the NameTag is ignored.
+\NameTag{Kuhn, \today}
+%
+%
+\begin{document}
+%
+% with Journal, manually make first letters uppercase
+\title{Style Files for ASCE-like Documents~--- Version 3.0}
+%
+% enter authors and affiliations in the manner of the authblk.sty package.
+% Authors' [*] are matched with affiliations' [*]
+\author[1]{Matthew R. Kuhn, M.ASCE}
+\author[2]{Second Author}
+\author[2]{Third Author}
+\affil[1]{Donald P. Shiley School of Engrg.,
+          Univ.\ of Portland, 5000 N.\ Willamette Blvd.,
+          Portland, OR 97203. E-mail: kuhn@up.edu.}
+\affil[2]{Affiliation of the second and third authors.}
+%
+% you must process the title and authors
+\maketitle
+%
+\begin{abstract}
+Package \texttt{ascelike} produces manuscripts
+that roughly comply with
+guidelines of the American Society of Civil Engineers (ASCE).
+The package has the options of producing journal submissions
+for review (option \texttt{Journal}),
+of producing ``camera ready'' submissions for ASCE's proceedings
+publications (option \texttt{Proceedings}),
+and of producing two-column preprints (option \texttt{Preprint}).
+You are reading a document that was produced with the input
+file \texttt{ascexmpl.tex}
+and with the three components of
+the \texttt{ascelike} package:
+the document-class file \texttt{ascelike.cls}, 
+the bibliographic style \texttt{ascelike.bbx}, and
+the citation style \texttt{ascelike.cbx}.
+This document serves as a brief guide to \texttt{ascelike},
+as well as a test of its output and a template for your own papers.
+The package is freely available from the CTAN archive
+\verb+https://www.ctan.org+
+and from \verb+https://github.com/mrkuhn53/ascelike+,
+under the LaTeX 
+Project Public License, version 1.3 or later.
+%
+% using the new command \KeyWords{}. For fidelity with ASCE journals, begin
+% keywords with an uppercase letter, and separate keywords with semi-colons ;
+\KeyWords{\LaTeX; ASCE; Document class; 
+          ascelike.cls~(version 3.0);
+          ascelike.bbx~(version 3.0);
+          ascelike.cbx~(version 3.0).}
+%
+\end{abstract}
+%
+% for the Preprint option, the next line creates two-column documents.
+% You can leave the line here, even if you don't use the Preprint option
+\ifthenelse{\boolean{Preprint}}{\begin{multicols}{2}}{}
+%
+% this begins the document's text
+\section{Introduction}\label{sec:Introduction}
+%
+Package \texttt{ascelike} produces
+manuscripts that roughly comply with
+guidelines of the American Society of Civil Engineers (ASCE).
+The package consists of
+the \texttt{ascelike.cls} document-class; the 
+bibliographic and citation styles, \texttt{ascelike.bbx}
+and \texttt{ascelike.cbx}; and the
+example file \texttt{ascexmpl.tex}. 
+All are available from the \texttt{CTAN} website
+\verb+https://www.ctan.org+
+and from \verb+https://github.com/mrkuhn53/ascelike+
+\cite{Kuhn:2011a}.
+These files are included in
+distributions of \LaTeX, which are
+readily available for most computer systems
+(e.g. \textsf{TexLive}, \textsf{MikTex}, and \textsf{MacTex}).
+ASCE has significantly changed its formats
+since the earlier version of \texttt{ascelike} was created in 2010,
+and \texttt{ascelike} has been updated accordingly.
+The current version of \texttt{ascelike} is 3.0.
+If you follow the instructions in this document,
+but you are using an earlier version of \texttt{ascelike},
+you will probably
+encounter errors when trying to run \LaTeX\ with your document.
+%
+\par
+The document that you are reading was created with the
+\texttt{ascelike} package and with the input (template) file
+\texttt{ascexmpl.tex}. 
+This file also
+serves as a test of
+the \LaTeX\ \texttt{ascelike} package and as a template
+for users' papers.
+%
+\par
+Most persons access \LaTeX\ either through an online
+cloud service (\texttt{CoCalc.com}, \texttt{Overleaf.com}, etc.)
+or with a \LaTeX\ system installed on their computer.
+If the former, the online service will likely already
+have updated to version 3.0.
+If \LaTeX\ is installed on your computer,
+unless you have recently updated your distribution of 
+\LaTeX\ (e.g. \textsf{TexLive}, \textsf{MikTex}, and \textsf{MacTex}),
+your version of \texttt{ascelike} will likely be an earlier one.
+The \texttt{ascelike} package should eventually be incorporated in
+your computer's \LaTeX\ distribution,
+and updating your distribution will activate the new
+\texttt{ascelike}.
+Until then, you can
+download and install the most recent files from
+\verb+http://www.ctan.org+.
+For example, the three files,
+\texttt{ascelike.cls}, \texttt{ascelike.bbx}, and \texttt{ascelike.cbx}
+can be installed in the same folder as your document's
+``\texttt{.tex}'' file before running \LaTeX.
+%
+\par
+In addition to \texttt{ascelike.cls}, 
+the files \texttt{ascelike.bbx} and \texttt{ascelike.cbx}
+are used with
+the bibliographic tool \textsc{biber} and the
+package \textsc{Bib}\LaTeX\ to produce ASCE-like 
+citations and bibliographic entries (with ASCE's use of
+quotation marks around titles, etc.) \cite{Kuhn:2011a}.
+Note that the package \texttt{biblatex} and the helper program 
+\textsc{biber} should now be used, instead of the older
+\textsc{bibtex}.
+Likewise, the older \texttt{ascelike.bst} is deprecated by
+the new files \texttt{ascelike.bbx} and \texttt{ascelike.cbx}.
+An example bibliographic data base is given in the
+supplementary file \texttt{ascexmpl.bib}.
+\par
+The document-class \texttt{ascelike.cls} requires several
+supplementary packages:
+\texttt{setspace}, 
+\texttt{endfloat},
+\texttt{lineno},
+\texttt{authblk}, etc.
+Without these packages, \texttt{ascelike} \emph{will not work},
+and an error message will indicate the \texttt{*.sty} files that are missing.
+These files are typically included with 
+online cloud platforms (\verb+CoCalc.com+, \texttt{Overleaf.com}, etc.)
+and in
+\LaTeX\ computer distributions, such as
+\textsf{TexLive}, \textsf{MikTex}, and \textsf{MacTex}.
+All of the \texttt{ascelike} files are freely available
+from the Comprehensive \TeX\ Archive Network (CTAN) archive,
+\verb+http://www.ctan.org+.
+If one of these files is not installed as part of your \TeX\ system,
+you should download the file from the CTAN archive and place it in the same folder
+as your manuscript files.
+On GNU/Linux systems, these files are typically bundled
+into software packages that can be downloaded and installed with
+your system's package management utilities.
+%
+\par
+In addition to these essential files,
+we have found the following packages useful:
+%
+\begin{itemize}
+\item
+\texttt{graphicx} and its companion files for incorporating
+EPS and PDF graphic files,
+\item
+\texttt{amsmath} and its companion files for AMS math formatting,
+\item
+\texttt{booktabs} to produce publication-grade tables, and
+\item
+\texttt{microtype} for tight kerning, as in ASCE's publications.
+\end{itemize}
+%
+These packages 
+are included in most \LaTeX\ distributions and
+are freely 
+available from the CTAN archive.
+%
+\par
+The \texttt{ascelike} package is distributed under the
+terms of the LaTeX Project Public License
+(available from the CTAN archives),
+either version 1.3 of the License, or any later version.
+If you modify
+\texttt{ascelike.cls}, you should rename it so that ``altered''
+copies are not later proliferated.
+Although \texttt{ascelike} is \emph{not} 
+produced by ASCE, its agents,
+or employees, \texttt{ascelike} is now referenced on
+the ASCE web-site.
+%
+\section{Input Options}\label{sec:Input}
+You should
+prepare your \verb+*.tex+ input file as a regular
+\LaTeX\ file,
+but, of course, substituting ``\texttt{ascelike}'' for ``\texttt{article}''
+in the opening \verb+\documentclass+ command.
+The document class \texttt{ascelike.cls} provides the options given
+below.
+Choice of the main \verb+Proceedings|+\-\verb+Journal|+\-\verb+Preprint+ 
+option is the most important; whereas,
+the other options allow variations of the main option.
+%
+\begin{enumerate}
+\item
+The main option
+\verb+Journal|+\verb+Proceedings|+\verb+Preprint+ specifies the overall 
+format of the manuscript.
+For most manuscripts, this is the only option needed;
+the other options simply modify the main option.
+%
+\begin{itemize}
+\item
+\texttt{Journal} is the default format, 
+producing manuscripts intended
+for paper submissions to ASCE journals for review.
+The default settings of \texttt{Journal}
+are 12pt text, double-spaced text, numbered lines, and in-text figures.
+These default settings can be altered with the options that are 
+described below.
+%
+``\texttt{Journal}'' produces 
+proper headings for
+sections, subsections, subsubsections, appendices, and the abstract,
+and it produces the proper page margins and numbers the pages.
+Note that ASCE journals do not use numbered sections, subsections,
+or subsubsections.
+This behavior can be changed with the \texttt{SectionNumbers} option.
+%
+\item
+``\texttt{Proceedings}'' produces
+manuscripts for ASCE conference proceedings.  
+As default settings, 
+\verb+Proceedings+ uses single-spaced 12pt text,
+places figures and tables within the text, and does not number lines.  
+All of these default settings can be altered with the options that are
+described below.
+\texttt{Proceedings} produces proper headings for
+sections, subsections, subsubsections, appendices, and the abstract.
+%
+\item
+``\texttt{Preprint}'' produces
+manuscripts that resemble the ASCE journal papers:
+two-column output; 10~point fonts;
+a one-column title, author block, and abstract;
+and horizontal rules placed around the abstract and under figures.
+Even with this option, however, some intervention is required 
+by the user in their
+\texttt{*.tex} document to achieve these effects.
+These interventions are described below in the
+section titled ``Preprints'' and are indicated within the
+example file \texttt{ascexmpl.tex}.
+\end{itemize}
+%
+\item
+Option \verb+BackFigs+ can be used to override 
+the default placing of tables within the manuscript,
+so that figures and tables are placed at the end of document.
+With \verb+BackFigs+, do not place any characters after
+\verb+\end{figure}+ and \verb+\end{table}+ commands.
+%
+\item
+Options \verb+SingleSpace|DoubleSpace+ can be used to override 
+the default text spacing in the 
+\texttt{Journal} and \texttt{Proceedings} formats.
+%
+\item
+Options \verb+10pt|11pt|12pt+ can be used to override the 
+default text size (12pt).
+%
+\item
+The option \texttt{NoLists} suppresses inclusion of lists of tables
+and figures, when \texttt{BackFigs} is also given as an option.
+%
+\item
+The option \texttt{NoPageNumbers} suppresses the printing of page numbers.
+%
+\item
+The options \verb+NoLineNumbers|LineNumbers+ can be used to override
+the default use (or absence) of line numbers in the \texttt{Journal} and
+\texttt{Proceedings} formats.
+When \verb+LineNumbers+ is used with \texttt{Proceedings},
+running \LaTeX\ throws a non-critical error message that can be
+ignored to complete compiling the document.
+%
+\item
+The option \texttt{SectionNumbers} produces an automatic numbering of sections.
+Without the \texttt{SectionNumbers} option, sections will \emph{not} be
+numbered, as this seems is the prefered formatting of ASCE publications 
+(note that appendices will, however, be automatically
+``numbered'' with Roman numerals).  
+With the \texttt{SectionNumbers} option, sections and
+subsections are numbered with Arabic numerals (e.g. 2, 2.1, etc.), but
+subsubsection headings will not be numbered.  To change this default
+depth of numbering when
+the option \texttt{SectionNumbers} is invoked, 
+insert the \texttt{$\backslash$setcounter$\{$secnumdepth$\}$} command
+in the preamble of your document.
+Even with the \texttt{SectionNumbers} option, you can use the ``starred''
+form, \verb!\section*{ }!, to create a section heading without numbers.
+This might be desirable for an Acknowledgements section at the end of
+a paper.  Note, however, that the starred form will not suppress
+the numbering of subsections or subsubsections.
+\end{enumerate}
+%
+In addition, \texttt{ascelike} provides the new command \verb+KeyWords+,
+described below.
+%
+\section{Preliminaries}\label{sec:prelim}
+Version~3.0
+diverges from previous versions:
+the formatting of citations and bibliographic entries is now managed
+by the \texttt{biblatex} package (not \textsc{bibtex}),
+and this formatting is now processed with the \texttt{biber}
+helper program, rather than with \texttt{bibtex}.
+Unfortunately, \texttt{biblatex} cannot be loaded by the document-class
+file \texttt{ascelike.cls}, and it must be 
+manually loaded within your document.
+In the documents preamble and immediately following the opening statement
+\verb+\documentclass[...]{ascelike}+, you must include this one
+line:
+\begin{quote}
+\verb+\usepackage{biblatex}+
+\end{quote}
+Again, you should use \textsc{biber} to process the document's citations,
+not \textsc{bibtex}.
+The \texttt{ascelike} document-class automatically passes the following
+options to \texttt{biblatex}:
+options \texttt{backend=biber, uniquename=init, style=ascelike}.
+%
+\section{Title, Authors, Abstract, and Keywords}\label{sec:title}
+%
+These aspects of version~3.0 are quite different from previous versions.
+The title is entered, as before, with the standard \LaTeX\ command
+\texttt{title$\{...\}$}.
+\par
+The package \texttt{authblk}
+is now used for formatting the author block.
+As described in the \texttt{authblk} documentation, the authors and
+affiliations are input in the following manner:
+\begin{quote}
+  \verb+\author[1]{+\emph{author1}\verb+}+\\
+  \verb+\author[1]{+\emph{author2}\verb+}+\\
+  \verb+\author[2]{+\emph{author3}\verb+}+\\
+  \verb+\author[2]{+\emph{author4}\verb+}+\\
+  \verb+\affil[1]{+\emph{affil1}\verb+}+\\
+  \verb+\affil[2]{+\emph{affil2}\verb+}+\\
+  $\cdots$
+\end{quote}
+%
+\par
+The title and author block are followed by the abstract,
+which should be
+placed within the \verb+\begin{abstract}+~$...$ \verb+\end{abstract}+
+environment.
+%
+\par
+The command \verb+\KeyWords{<your key words>}+ can be used to produce
+a labeled list of key words.  
+Although it can be placed anywhere in the document,
+if placed inside of the \texttt{abstract} environment,
+it works nicely with the \texttt{preprint} option.
+%
+\par
+In lieu of the \texttt{authblk} construct described above,
+the standard \LaTeX\ commands of \verb+\author+
+and \verb+\thanks+ can be used,
+which will cause the affiliations to be appear as footnotes.
+This alternative maintains backward compatability with \texttt{*.tex} files
+created for older versions of \texttt{ascelike}.
+%
+\section{Sections, Subsections, Equations, etc.}\label{sec:Sections}
+Sections and equations are entered in the usual manner,
+and \texttt{ascelike} simply formats them in the ASCE styles.
+For example,
+section heading are automatically made uppercase with
+\texttt{Proceedings} manuscripts, the first paragraph of sections
+are not indented in \texttt{Journal} manuscripts, etc.
+%
+\subsection{An Example Subsection}\label{sec:Example}
+%
+No automatic capitalization occurs with subsection headings; 
+you will need to capitalize the first letter of each word,
+as in ``An Example Subsection.''
+%
+\subsubsection{An example subsubsection}%
+\label{sec:Example2}
+No automatic capitalization occurs with subsubsections; 
+you will need to capitalize only the first letter of subsubsection 
+headings.
+\par
+And now we include an example of a displayed equation (Eq.~\ref{eq:Einstein})
+%
+\begin{equation} \label{eq:Einstein}
+E = m c^{2}
+\end{equation}
+%
+a figure (Fig.~\ref{fig:box_fig}),%
+%
+\begin{figure}
+%\begin{figure*}  % with Preprint option, use this one for two-column figures
+  \centering
+  \framebox[3.00in]{\rule[0in]{0in}{1.00in}}
+  \caption{An example figure (just a box).}
+  \label{fig:box_fig}
+%
+\end{figure}
+%\end{figure*}  % with Preprint option, use this one for two-column figures
+%
+and a table (Table~\ref{table:assembly}).
+%
+\begin{table}
+%\begin{table*}   % with Preprint option, use this one for 2-column tables
+  \caption{An example table using the booktabs package}
+  \label{table:assembly}
+  \centering
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    Assembly attribute & Values \\
+    \midrule
+    Number of particles & 4008 \\
+    Particle sizes & Multiple  \\
+    Particle size range & $0.45D_{50}^{\:\ast}$ to $1.40D_{50}$ \\
+    Initial void ratio, $e_{\mathrm{init}}$ & $0.179$ \\
+    Assembly size$^{\ast}$ & $54D_{50} \times 54D_{50} \times 54D_{50}$ \\
+    \bottomrule
+    \multicolumn{2}{l}{$^\ast$$D_{50}$ represents the median particle diameter}
+  \end{tabular}
+\end{table}
+%\end{table*} % with Preprint option, use this one for two-column tables
+%
+\section{Citations and Bibliographic Entries}\label{sec:bibliogrphy}
+When used together, the three components
+of \texttt{ascelike}~--- \texttt{ascelike.cls}, \texttt{ascelike.bbx},
+\texttt{ascelike.cbx}~---
+use your \texttt{*.bib} bibliographic database file to
+produce citations in name--year format.
+In addition to including the statement
+\verb+\texttt{authblk}+ in your document's preamble
+(as instructed in the section titled Preliminaries),
+\texttt{biblatex}
+requires your document include two additional lines.
+First, within your document's preamble
+(i.e., prior to the \verb+\begin{document}+ statement),
+you should provide the name of your input database, for example,
+%
+\begin{quote}
+  \verb+\addbibresource{MyBibFile.bib}+
+\end{quote}
+%
+Note that the ``\texttt{.bib}'' suffix must be included.
+Second, at the location of your References section
+(near the end of your document),
+use the following statement to locate the section.
+%
+\begin{quote}
+  \verb+\printbibliography+
+\end{quote}
+%
+The above two statements are used \emph{in lieu of} the \textsc{bibtex}
+statements \verb+\bibliography+,
+\verb+\bibliographystyle+, and \verb+\thebibliography+.
+%
+\par
+Unlike previous versions, by using the package \texttt{biblatex},
+you should now process the bibliographic
+entries with the helper program \textsc{biber}, \emph{not} \textsc{bibtex}.
+The typical command sequence for processing your \texttt{*.tex} file 
+to create a \text{PDF} file is as follows:
+%
+  \begin{quote}
+    \verb+pdflatex <+\emph{your *.tex file prefix}\verb+>+\\
+    \verb+biber <+\emph{your *.tex file prefix}\verb+>+\\
+    \verb+pdflatex <+\emph{your *.tex file prefix}\verb+>+
+  \end{quote}
+%
+although extra runs of \textsf{pdflatex} might be needed when figures
+are placed at the end of the manuscript
+(option \texttt{BackFigs}).
+%
+\par
+As with previous versions,
+the following citation options are available:
+\begin{itemize}
+\item
+\verb+\cite{key}+ produces citations with full author 
+list and year \cite{Ireland:1954a,Gaspar:2001a}.
+\item
+\verb+\citeA{key}+ produces citations with only the full 
+author list: e.g. \citeA{Ireland:1954a}
+\item
+\verb+\citeN{key}+ produces citations with the full author list and year, but
+which can be used as nouns in a sentence; no parentheses appear around
+the author names, but only around the year: e.g. \citeN{Ireland:1954a}
+states that \ldots
+\item
+\verb+\citeyear{key}+ produces the year information only, within parentheses,
+as in \citeyear{Ireland:1954a}.
+\end{itemize}
+%
+\par
+Notwithstanding the above instructions,
+you can also use the many citation options of
+the \texttt{biblatex} package:
+\verb+\parencite+, \verb+\textcite+, \verb+\smartcite+, etc.
+%
+Note that version~3.0 is backward-compatible 
+with earlier versions:
+you can still process the bibliography by \emph{not} using
+\texttt{biblatex}, its commands \verb+\addbibresource{}+
+and \verb+\printbibliography+, and \textsc{biber}.
+This is done with the \LaTeX\ command \verb+\bibliography{}+
+and using \textsc{bibtex}.
+%
+\par
+The bibliographic data base \texttt{ascexmpl.bib}
+gives examples of bibliographic entries for different document types.
+The References section of this document is created with
+the \texttt{ascelike.bbx} style for the following entries:
+\begin{itemize}
+\item journal articles \cite{Stahl:2004a,Pennoni:1992a},
+\item a book \cite{Goossens:1994a,Evans:2003a}
+\item an article in an edited book using 
+      \texttt{@INCOLLECTION} \cite{Zadeh:1981a}
+\item proceedings papers, using \texttt{@INPROCEEDINGS} 
+      \cite{Eshenaur:1991a,Garrett:2003a}
+\item a website using \texttt{@ONLINE},
+      with the accessed date given in the \texttt{NOTE} field,
+      and with the full ``Arizona Dept. of Commerce'' 
+      given in the \texttt{NAME} field
+      inside of braces $\{\:\}$
+      \cite{Arizona:2005a,Foucher:2017a}
+\item a masters thesis using \texttt{@MASTERSTHESIS} \cite{Sotiropulos:1991a}
+\item a doctoral thesis using \texttt{@PHDTHESIS} \cite{Chang:1987a}
+\item a forthcoming article (e.g., in press), with the field
+     \texttt{pubstate = "forthcoming"}
+     (note the lowercase "forthcoming", and quotation marks,
+     not braces) \cite{Dasgupta:2008a,Han}
+\item an anonymous book \cite{Moody:1988a},
+\item an anonymous report using \texttt{@MANUAL} \cite{FHWA:1991a}
+\item data sets using \texttt{@ARTICLE} and with the accessed date in the
+      \texttt{NOTE} field \cite{Ansolabehere:2014a,Thernstrom:1986a}
+\item a building code using \texttt{@MANUAL} or \texttt{@BOOK} \cite{ACI:1989a}
+\item a discussion of an \texttt{@ARTICLE} \cite{Vesilind:1992a}
+\item a paper in a foreign journal \cite{Ireland:1954a}
+\item a standard using \texttt{@INCOLLECTION} \cite{ASTM:1991a}
+\item a translated book \cite{Melan:1913a}
+\item a two-part paper \cite{Frater:1992a,Frater:1992b}
+\item a university report, using \texttt{@TECHREPORT} \cite{Duan:1990a}
+\item an untitled item in the Federal Register using 
+      \texttt{@MANUAL} \cite{FR:1968a}
+\item a newspaper article using \texttt{@ARTICLE} and with the date
+      given in the entry field \texttt{NOTE} \cite{Mossberg:1993a}
+\item works in a foreign language \cite{Duvant:1972a,Reiffenstuhl:1982a}
+\item electronic material as a CD, using \texttt{@ARTICLE} with
+      the entry fields \texttt{JOURNAL} and \texttt{NOTE} \cite{Liggett:1998a}
+\item software using \texttt{@MANUAL} \cite{Lotus:1985a}
+\item two works by the same author in the same year
+      \cite{Gaspar:2001b,Gaspar:2001a}
+\item two works by three authors in the same year that only share
+      the first two authors \cite{Huang2009a,Huang2009b}
+\end{itemize}
+%
+\section{Creating Preprint Manuscripts}
+A manuscript that approximates an ASCE journal paper can be created with
+the following changes to your \texttt{*.tex} file:
+%
+\begin{enumerate}
+\item
+  Use the \verb+\documentclass[Preprint,10pt]{ascelike}+ at the
+  start of your \texttt{*.tex} file.
+\item
+  Include the following command, which should follow the
+  abstract and keywords, and should immediately precede
+  the first section of text:
+  \begin{quote}
+    \verb+\begin{multicols}{2}+
+  \end{quote}
+\item
+  Include the following command, immediately before the
+  \verb+\end{document}+ at the end of the file:
+  \begin{quote}
+    \verb+\end{multicols}+
+  \end{quote}
+\item
+  With each figure and table (i.e., float),
+  you should decided whether it is a one-column or two-column float.
+  For one-column floats, use the usual
+  \verb+\begin{figure}+~$\ldots$ \verb+\end{figure}+
+  and \verb+\begin{table}+~$\ldots$ \verb+\end{table}+ commands.
+  For full-width floats that span two columns,
+  replace these commands with their starred ``*'' versions:
+  \verb+\begin{figure*}+~$\ldots$ \verb+\end{figure*}+
+  and \verb+\begin{table*}+~$\ldots$ \verb+\end{table*}+.
+\end{enumerate}
+%
+% uncomment the following line to begin the references on a new page
+%\pagebreak
+%
+% if you have no appendices, comment or delete this line
+\appendix
+%
+% an example of notation section, using the tabular environment. Note that 
+% this and all appendices (except References) start with the \section command
+%
+\section{Notation}
+\emph{The following symbols are used in this paper:}%\par\vspace{0.10in}
+\nopagebreak
+\par
+\begin{tabular}{r  @{\hspace{1em}=\hspace{1em}}  l}
+$D$                    & pile diameter (m); \\
+$R$                    & distance (m);      and\\
+$C_{\mathrm{Oh\;no!}}$ & fudge factor.
+\end{tabular}
+%
+% Here, we use "\printbibliography" to create an "*.aux" file that can be
+% processed with biber, using the stylefiles, ascelike.bbx and ascelike.cbx
+\printbibliography
+%
+%
+% the next line is for the Preprint option, for a two-column preprint. You
+% can leave the line here, even if you don't use the Preprint option
+\ifthenelse{\boolean{Preprint}}{\end{multicols}}{}
+%
+\end{document}

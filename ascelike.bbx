@@ -1,0 +1,213 @@
+\ProvidesFile{ascelike.bbx}
+\RequireBibliographyStyle{standard}
+\RequireBibliographyStyle{authoryear-comp}
+\ExecuteBibliographyOptions{sorting=nyt,maxcitenames=2,maxbibnames=5,
+                            giveninits=true,dashed=false,terseinits=false,%
+                            uniquename=init,isbn=false}
+%
+% "In " for proceedings
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\ }}}
+%
+% volume (number)
+\renewbibmacro*{volume+number+eid}{%
+    \iffieldundef{volume}{}
+      {\printtext{\printfield{volume}~}}%    no punctuation between
+    \iffieldundef{number}{}
+      {\printtext[parens]{\printfield{number}}}%  volume and number fields
+    \setunit{\bibeidpunct}%
+    \printfield{eid}}
+%
+% colon before page numbers
+\renewcommand{\bibpagespunct}%
+  {\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
+%
+% page numbers without "pp."
+\DeclareFieldFormat{pages}
+  {\iffieldundef{pages}{}
+   {#1}}
+%
+% remove parentheses around year.  Add period after names block.
+\renewbibmacro*{date+extradate}{%
+    \iffieldundef{year}
+      {}
+      {\addperiod\space\printfield{labelyear}%
+       \printfield{extradate}}}
+%
+% include pubstate (e.g., "forthcoming") with the date field
+\DeclareLabeldate{%
+  \field{date}
+  \field{year}
+  \field{eventdate}
+  \field{origdate}
+  \field{urldate}
+  \field{pubstate}
+  \literal{nodate}
+}
+%
+% renew pubstate, so that the pubstate is printed again at the end of bib item
+\renewbibmacro*{addendum+pubstate}{%
+  \printfield{addendum}%
+  \iffieldequalstr{labeldatesource}{pubstate}{}
+  {\newunit\newblock\printfield{pubstate}}}
+%
+% use pubstate, if the year is empty
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
+    {\usebibmacro{bbx:dashcheck}
+       {\bibnamedash}
+       {\usebibmacro{bbx:savehash}%
+        \printnames{author}%
+        \iffieldundef{authortype}
+          {\setunit{\printdelim{nameyeardelim}}}
+          {\setunit{\printdelim{authortypedelim}}}}%
+     \iffieldundef{authortype}
+       {}
+       {\usebibmacro{authorstrg}%
+        \setunit{\printdelim{nameyeardelim}}}}%
+    {\global\undef\bbx@lasthash
+     \usebibmacro{labeltitle}%
+     \setunit*{\printdelim{nonameyeardelim}}}%
+  \iffieldundef{date}                                     % added
+    {\iffieldundef{pubstate}{}                            % added
+      {\setunit{\addperiod\space}\printfield{pubstate}}}  % added
+    {}                                                    % added
+  \usebibmacro{date+extradate}}
+%
+% do not print "URL" and "DOI" in the bibliography
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{doi}{%
+  \ifhyperref
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}}
+%
+% use normal font for url's
+\urlstyle{same}
+%      
+% "edited by" in edited works
+\DefineBibliographyStrings{american}{%
+  editor = {\lowercase{e}dited by},
+  editors= {\lowercase{e}dited by}
+ }
+\renewbibmacro*{byeditor+others}{%
+  \ifnameundef{editor}
+    {}
+    {\usebibmacro{editor+othersstrg}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \clearname{editor}%
+     \newunit}%
+  \usebibmacro{byeditorx}%
+  \usebibmacro{bytranslator+others}}
+%
+\renewbibmacro*{byeditor}{%
+  \ifnameundef{editor}
+    {}
+    {\usebibmacro{editor}%
+     \setunit{\addspace}%
+     \printnames[byeditor]{editor}%
+     \newunit}%
+  \usebibmacro{byeditorx}}
+%
+\newbibmacro*{institution+location}{%
+  \printlist{institution}%
+  \iflistundef{location}
+    {\setunit*{\addcomma\space}}
+    {\setunit*{\addcomma\space}}%
+  \printlist{location}%
+  \setunit*{\addcomma\space}%
+% \usebibmacro{date}%
+  \newunit}
+%
+\DeclareBibliographyDriver{thesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit
+  \usebibmacro{institution+location}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+%
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \usebibmacro{byeditor+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+  \printlist{organization}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{date}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+%
+% remove the () when the issue is empty
+\renewbibmacro*{journal+issuetitle}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \setunit{\addspace}%
+% \usebibmacro{issue+date}%
+  \setunit{\addcolon\space}%
+  \usebibmacro{issue}%
+  \newunit%
+  }
+%
+\endinput
