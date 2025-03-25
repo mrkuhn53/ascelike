@@ -6,7 +6,7 @@ proceedings papers, and two-column likenesses of ASCE's journal articles
 Version 3.0, March 2025
 
 The package is freely available under the LaTeX Project Public License, 
-version 1.1 or later.
+version 1.3 or later.
 
 The two main files are
   ascelike.cls - Document class file
