@@ -30,4 +30,4 @@ newtxmath.sty, and microtype.sty. Without these files, ascelike.cls will
 not work. All of these packages are available in the CTAN archive.
 
 The ascelike package is also available on github.com.  Report problems 
-and suggestions to Matthew R. Kuhn, kuhn@up.edu
+and suggestions to Matthew R. Kuhn, kuhn_at_up.edu
